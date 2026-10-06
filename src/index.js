@@ -7,10 +7,7 @@ import Router from "./components/Router";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <h1>Index principal</h1>
-    <hr />
     <Router />
-    <h2>Pie de página</h2>
   </React.StrictMode>,
 );
 
