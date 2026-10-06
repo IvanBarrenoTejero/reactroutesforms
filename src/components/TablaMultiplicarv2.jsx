@@ -1,36 +1,53 @@
 import React, { Component } from "react";
-export default class TablaMultiplicar extends Component {
-  cajaNumero = React.createRef();
+export default class TablaMultiplicarV2 extends Component {
+  selectNumero = React.createRef();
   generarTabla = (event) => {
     event.preventDefault();
-    let numero = parseInt(this.cajaNumero.current.value);
+    let numero = parseInt(this.selectNumero.current.value);
     let aux = [];
     for (var i = 1; i <= 10; i++) {
       let operacion = numero + " * " + i;
       let resultado = numero * i;
-      let dato = {
-        operacion: operacion,
-        resultado: resultado,
-      };
-      aux.push(dato);
+      aux.push(
+        <tr key={i}>
+          <td>{operacion}</td>
+          <td>{resultado}</td>
+        </tr>,
+      );
     }
     this.setState({
       tabla: aux,
     });
   };
+  generarNumeros = () => {
+    let aux = [];
+    for (var i = 1; i <= 5; i++) {
+      let aleat = parseInt(Math.random() * 50) + 1;
+      aux.push(aleat);
+    }
+    this.setState({
+      numeros: aux,
+    });
+  };
   state = {
     tabla: [],
+    numeros: [],
   };
   render() {
     return (
       <div>
-        <h1>Tabla Multiplicar</h1>
+        <h1 style={{ color: "blue" }}>Tabla Multiplicar V2</h1>
+        <button onClick={this.generarNumeros}>Generar números</button>
         <form onSubmit={this.generarTabla}>
           <label>Número: </label>
-          <input type="number" ref={this.cajaNumero} />
+          <select ref={this.selectNumero}>
+            {this.state.numeros.map((num, index) => {
+              return <option>{num}</option>;
+            })}
+          </select>
           <button>Mostrar tabla</button>
         </form>
-        <table>
+        <table border="1">
           <thead>
             <tr>
               <th>Operación</th>
@@ -39,12 +56,7 @@ export default class TablaMultiplicar extends Component {
           </thead>
           <tbody>
             {this.state.tabla.map((fila, index) => {
-              return (
-                <tr key={index}>
-                  <td>{fila.operacion}</td>
-                  <td>{fila.resultado}</td>
-                </tr>
-              );
+              return fila;
             })}
           </tbody>
         </table>
