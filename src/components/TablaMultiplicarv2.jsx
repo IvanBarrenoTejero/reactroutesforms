@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 export default class TablaMultiplicarV2 extends Component {
   selectNumero = React.createRef();
   generarTabla = (event) => {
@@ -19,6 +20,7 @@ export default class TablaMultiplicarV2 extends Component {
       tabla: aux,
     });
   };
+
   generarNumeros = () => {
     let aux = [];
     for (var i = 1; i <= 5; i++) {
@@ -29,9 +31,14 @@ export default class TablaMultiplicarV2 extends Component {
       numeros: aux,
     });
   };
+
   state = {
     tabla: [],
     numeros: [],
+  };
+
+  componentDidMount = () => {
+    this.generarNumeros();
   };
   render() {
     return (
